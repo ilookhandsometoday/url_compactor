@@ -1,4 +1,4 @@
-_alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_'
+ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_'
 
 
 def _decimal_to_base_64_number(n: int) -> list[int]:
@@ -25,7 +25,7 @@ def id_to_path(identifier: int) -> str:
     as_base_64_numeral: list[int] = _decimal_to_base_64_number(identifier)
     result: str = ''
     for digit in as_base_64_numeral:
-        result = result + _alphabet[digit]
+        result = result + ALPHABET[digit]
     return result
 
 
@@ -41,6 +41,6 @@ def _base_64_to_decimal(base_64_digits: list[int]) -> int:
 def path_to_id(path: str) -> int:
     base_64_digits = []
     for char in path:
-        base_64_digits.append(_alphabet.index(char))
+        base_64_digits.append(ALPHABET.index(char))
     return _base_64_to_decimal(base_64_digits)
 
