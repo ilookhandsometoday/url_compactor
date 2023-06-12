@@ -13,7 +13,7 @@ class AddLinkRequest(BaseModel):
 
     @validator('url')
     def validate_url(cls, v):
-        if re.match(_URL_REGEX, v) is not None:
+        if not re.match(_URL_REGEX, v) is not None:
             raise ValueError(f'Not a valid URL. Valid URL is matched by this regex: {_URL_REGEX}')
 
         return v
