@@ -50,5 +50,5 @@ async def redirect(path: RedirectPath = Depends(RedirectPath.depends), session=D
     link_id: int = shorten.path_to_id(path.path)
     link: Optional[Link] = await session.get(Link, link_id)
     original_link = await link.awaitable_attrs.original_link
-    return RedirectResponse(original_link)
+    return RedirectResponse(original_link, status_code=308)
 
