@@ -58,9 +58,9 @@ class RedirectPath(BaseModel):
     # validators don't really work properly if a pydantic model is used as a class-as-a-dependency
     # this is a workaround https://github.com/tiangolo/fastapi/issues/147
     @classmethod
-    def depends(cls, short_url: str):
+    def depends(cls, path: str):
         try:
-            return cls(short_url=short_url)
+            return cls(path=path)
         except ValidationError as e:
             for error in e.errors():
                 error['loc'] = ('path', *error['loc'])
