@@ -3,6 +3,6 @@ from database import Base
 
 
 class Link(Base):
-    __table__ = 'link'
+    __tablename__ = 'link'
     ID = Column(Integer, primary_key=True, autoincrement=True)
     original_link = Column(String, nullable=False)

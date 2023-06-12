@@ -1,28 +1,33 @@
-from fastapi import APIRouter, Depends
+import shorten
+from fastapi import APIRouter, Depends, Path, Query
+from typing import Annotated
 from sqlalchemy.ext.asyncio import AsyncSession
-from database import session_factory
+from database import make_session
 from config import DOMAIN
 from models import Link
+from schemas import LinkRequest
+from utils import URL_REGEX
 
 main_router = APIRouter()
 
 
 @main_router.post('/link')
-async def add_link(session: AsyncSession = Depends(session_factory)):
+async def add_link(link: LinkRequest, session: AsyncSession = Depends(make_session)):
     ...
 
 
-# using POST since this kind of request doesn't really fit the semantics of a DELETE request
-@main_router.post('/delete_link')
-async def delete_link(session: AsyncSession = Depends(session_factory)):
+@main_router.delete('/link/{short_url:path}')
+async def delete_link(short_url: Annotated[str, Path(description='short link encoded with percent-encoding', regex=URL_REGEX)],
+                      session: AsyncSession = Depends(make_session)):
     ...
 
 
-@main_router.post('/full_url')
-async def full_url(session: AsyncSession = Depends(session_factory)):
+@main_router.get('/link/')
+async def full_url(short_url: Annotated[str, Query(description='short link encoded with percent-encoding', regex=URL_REGEX)],
+                   session: AsyncSession = Depends(make_session)):
     ...
 
 
 @main_router.get('/{path}')
-async def redirect(path: str, session: AsyncSession = Depends(session_factory)):
+async def redirect(path: str, session=Depends(make_session)):
     ...
