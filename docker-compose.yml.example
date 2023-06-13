@@ -1,0 +1,13 @@
+version: "3.5"
+services:
+  url_compactor:
+    image: url_compactor:0.1
+    container_name: url_compactor
+    hostname: url_compactor
+    restart: always
+    environment:
+      - URL_COMPACTOR_HOST=0.0.0.0
+      - URL_COMPACTOR_PORT=8080
+      - URL_COMPACTOR_DOMAIN=0.0.0.0:8080
+      - URL_COMPACTOR_DATABASE=postgresql+asyncpg://USERNAME:PASSWORD@localhost/DBNAME
+    network_mode: "host"
