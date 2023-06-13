@@ -18,9 +18,13 @@ def _decimal_to_base_64_number(n: int) -> list[int]:
 
 def id_to_path(identifier: int) -> str:
     """
+    Why use such a complicated way to generate short link paths?
     1) identifier given to the new entity in a database is unique in terms of this application
     2) a decimal number corresponds to one and only one number in any other base numeral system
     3) base 64 is derived from the fact that we use 64 characters to construct our shortened links
+    So, each identifier corresponds to a unique sequence of base 64 numerals, which in turn are match to a predetermined
+    alphabet
+    Transforms an integer into a sequence of symbols usable as a path in a URL. 
     """""
     as_base_64_numeral: list[int] = _decimal_to_base_64_number(identifier)
     result: str = ''
