@@ -1,8 +1,12 @@
 # Сервис для сжатия ссылок
 Docker version 24.0.2, build cb74dfc
+
 docker-compose version 1.29.2, build unknown
+
 Версии используемых пакетов прописаны в requirements.txt
+
 Написано под Python 3.10
+
 База данных - PostgreSQL
 
 # Что нужно знать для деплоя
