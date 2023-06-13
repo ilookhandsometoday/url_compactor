@@ -1,0 +1,19 @@
+FROM python:3.10.12-alpine3.17 as builder
+
+WORKDIR /opt/url_compactor
+
+COPY requirements.txt .
+RUN pip wheel --no-cache-dir --wheel-dir /opt/url_compactor/wheels -r requirements.txt
+
+FROM python:3.10.12-alpine3.17
+
+WORKDIR /opt/url_compactor
+
+COPY --from=builder /opt/url_compactor/wheels /wheels
+
+RUN pip install --no-cache /wheels/*
+
+COPY src/ src/
+
+ENTRYPOINT ["python3", "./src/main.py"]
+
