@@ -7,6 +7,6 @@ def attribute_error_handler(request: Request, exc: AttributeError):
     to read an attr from a None object (that usually hapens when session.get(Class, id) is used, and a row with id is
     nonexistent"""
     if 'awaitable_attrs' in exc.name:
-        return JSONResponse(status_code=400, content={'message': 'Invalid link'})
+        return JSONResponse(status_code=400, content={'message': 'Invalid short link'})
 
     raise exc

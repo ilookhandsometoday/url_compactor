@@ -8,7 +8,7 @@ from utils import remove_schema
 _URL_REGEX = r'(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)'
 
 
-class AddLinkRequest(BaseModel):
+class LinkRequest(BaseModel):
     url: str
 
     @validator('url')
@@ -17,6 +17,14 @@ class AddLinkRequest(BaseModel):
             raise ValueError(f'Not a valid URL. Valid URL is matched by this regex: {_URL_REGEX}')
 
         return v
+
+
+class AddLinkRequest(LinkRequest):
+    ...
+
+
+class UpdateLinkRequest(LinkRequest):
+    ...
 
 
 class ShortLinkPath(BaseModel):
@@ -71,8 +79,16 @@ class ShortLinkResponse(BaseModel):
     short_link: str
 
 
-class DeleteLinkResponse(BaseModel):
+class SuccessFailResponse(BaseModel):
     success: bool
+
+
+class DeleteLinkResponse(SuccessFailResponse):
+    ...
+
+
+class UpdateLinkResponse(SuccessFailResponse):
+    ...
 
 
 class FullUrlResponse(BaseModel):
