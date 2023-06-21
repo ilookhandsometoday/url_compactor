@@ -5,7 +5,7 @@ from shorten import ALPHABET
 from config import DOMAIN
 from utils import remove_schema
 
-_URL_REGEX = r'(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)'
+_URL_REGEX = r'^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$'
 
 
 class LinkRequest(BaseModel):
